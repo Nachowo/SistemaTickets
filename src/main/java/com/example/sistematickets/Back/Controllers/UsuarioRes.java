@@ -1,6 +1,6 @@
-package com.example.sistematickets.Controllers;
+package com.example.sistematickets.Back.Controllers;
 
-import com.example.sistematickets.Services.UsuarioServices;
+import com.example.sistematickets.Back.Services.UsuarioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

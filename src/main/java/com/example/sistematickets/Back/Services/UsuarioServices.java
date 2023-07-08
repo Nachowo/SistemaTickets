@@ -1,7 +1,7 @@
-package com.example.sistematickets.Services;
+package com.example.sistematickets.Back.Services;
 
-import com.example.sistematickets.Modelo.Usuario;
-import com.example.sistematickets.repositories.UsuarioRepo;
+import com.example.sistematickets.Back.Modelo.Usuario;
+import com.example.sistematickets.Back.repositories.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.sistematickets.Back.Modelo;
+package com.example.sistematickets.Modelo;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

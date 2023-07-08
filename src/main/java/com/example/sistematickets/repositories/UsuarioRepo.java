@@ -1,6 +1,6 @@
-package com.example.sistematickets.Back.repositories;
+package com.example.sistematickets.repositories;
 
-import com.example.sistematickets.Back.Modelo.Usuario;
+import com.example.sistematickets.Modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepo extends JpaRepository<Usuario,Long> {

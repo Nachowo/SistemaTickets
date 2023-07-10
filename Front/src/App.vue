@@ -5,6 +5,24 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
+    <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="200" height="200" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">Ticket</RouterLink>
+      </nav>
+    </div>
+  </header>
+
+  <RouterView />
+</template>
+
+<!--
+<template>
+  <header>
     <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="125" height="125" />
 
     <div class="wrapper">
@@ -19,7 +37,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <RouterView />
 </template>
-
+-->
 <style scoped>
 header {
   line-height: 1.5;

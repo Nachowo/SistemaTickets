@@ -4,6 +4,15 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
+  <HelloWorld/>
+  <div class="wrapper">
+    <HelloWorld msg="Sistema de ticket USACH" />
+  </div>
+  <RouterView />
+</template>
+
+<!--
+<template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="200" height="200" />
 
@@ -19,7 +28,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <RouterView />
 </template>
-
+-->
 <!--
 <template>
   <header>

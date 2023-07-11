@@ -9,6 +9,13 @@ defineProps({
 
 <template>
   <div class="greetings">
+    <h1 class="blue">{{ msg }}</h1>
+  </div>
+</template>
+
+<!--
+<template>
+  <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
       You’ve successfully created a project with
@@ -17,7 +24,7 @@ defineProps({
     </h3>
   </div>
 </template>
-
+-->
 <style scoped>
 h1 {
   font-weight: 500;

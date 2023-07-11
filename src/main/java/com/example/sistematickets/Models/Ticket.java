@@ -15,11 +15,15 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
     private Long id_ticket;
+    private String nombre;
+    private Long analista;
+    private String des;
+    /**
     private long id_solicitante;
     private long id_analista;
     private int categoria;
     private int prioridad;
     private String estado;
-
+    */
 
 }

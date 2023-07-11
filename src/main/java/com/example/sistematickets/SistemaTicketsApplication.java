@@ -1,6 +1,8 @@
 package com.example.sistematickets;
 
 import com.example.sistematickets.Models.Usuario;
+
+import com.example.sistematickets.Services.TicketService;
 import com.example.sistematickets.Services.UsuarioService;
 import com.example.sistematickets.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +18,24 @@ public class SistemaTicketsApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(SistemaTicketsApplication.class, args);
         UsuarioService usuarioService = context.getBean(UsuarioService.class);
-
+        TicketService ticketService = context.getBean(TicketService.class);
 
 
         Scanner input = new Scanner(System.in);
         String nombr;
         String correo;
         String pass;
-        while (true){
-            //para ingresar usuarios a la bd
 
+            ///para ingresar usuarios a la bd
+            /**
             System.out.println("Nombre");
             nombr = input.nextLine();
             System.out.println("Correo");
             correo = input.nextLine();
             System.out.println("Contrasena");
             pass = input.nextLine();
-
-            usuarioService.guardarUsuario(new Usuario(nombr,correo,pass));
-
-        }
+            */
+        System.out.println(ticketService.findTicket( 1L));
 
     }
 

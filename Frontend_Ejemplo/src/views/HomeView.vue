@@ -1,5 +1,4 @@
 <script>
-
   export default {
     data: () => ({
       rules: {
@@ -111,7 +110,7 @@
 body {
   background-color:  #424953;
 }
-.log-in { color:  #11be8d;
+.log-in { color:   #00A499;
 
 }
 </style>

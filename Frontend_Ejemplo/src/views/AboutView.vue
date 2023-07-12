@@ -19,6 +19,7 @@
 
     <!-- Resto del código -->
   </v-layout>
+
 </template>
 
 <style>

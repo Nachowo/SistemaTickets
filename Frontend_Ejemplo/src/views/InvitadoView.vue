@@ -20,32 +20,35 @@
       max-width="500"
       rounded="lg"
     >
-      <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
-      <v-responsive
+    <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
+    <v-responsive
     class="mx-auto"
     max-width="400"
   >
     <v-text-field
-    :rules="[rules3.required]"
+      :rules="[rules3.required]"
       clearable
       hide-details="auto"
       label="Direccion de correo electronico"
       placeholder="carlos.vera@usach.cl"
       type="email"
     ></v-text-field>
-  </v-responsive>
+     </v-responsive>
         <v-card-text class="text-medium-emphasis text-caption">
           Estimado usuario se le solicita escribir algun correo el cual podamos comunicarnos para efecto de seguimiento de su ticket.
         </v-card-text>
-      <v-btn
-        block
-        class="mb-8"
-        color="surface-variant"
-        size="large"
-        variant=""
-      >
-      <RouterLink to="/about">INICIA SESION</RouterLink>
-      </v-btn>
+
+        <RouterLink to="/about">
+        <v-btn
+          block
+          class="mb-1"
+          color="surface-variant"
+          size="large"
+          variant=""
+        ><div class="log-in">INICIAR SESIÓN</div>
+        </v-btn>
+      </RouterLink>
+
       <v-card-text class="text-center">
         <a
           class="text-blue text-decoration-none"
@@ -58,3 +61,8 @@
     </v-card>
   </div>
 </template>
+
+<style>
+.log-in { color:   #00A499;
+}
+</style>

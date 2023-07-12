@@ -16,7 +16,7 @@
 
 <template> 
     <header>
-      <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="200" height="200" />
+      <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="450" height="200" />
   </header>
   
   <div>
@@ -106,7 +106,11 @@
 -->
 </template>
 
-
+<style>
+body {
+  background-color:  #424953;
+}
+</style>
 
 
 

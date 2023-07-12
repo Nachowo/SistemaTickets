@@ -5,9 +5,6 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <HelloWorld/>
-  <div class="wrapper">
-    <HelloWorld msg="Sistema de ticket USACH" />
-  </div>
   <RouterView />
 </template>
 

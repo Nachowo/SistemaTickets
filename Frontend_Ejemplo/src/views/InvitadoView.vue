@@ -10,7 +10,7 @@
 
 <template> 
     <header>
-      <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="200" height="200" />
+        <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="450" height="200" />
   </header>
   
   <div>
@@ -35,7 +35,7 @@
     ></v-text-field>
   </v-responsive>
         <v-card-text class="text-medium-emphasis text-caption">
-          Estimado usuario se le solicita escribir algun correo el cual podamos comunicarnos ........ del ticket .
+          Estimado usuario se le solicita escribir algun correo el cual podamos comunicarnos para efecto de seguimiento de su ticket.
         </v-card-text>
       <v-btn
         block

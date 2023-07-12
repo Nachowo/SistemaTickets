@@ -2,10 +2,10 @@
   <v-layout class="rounded rounded-md">
     <v-app-bar> 
       <v-toolbar>
-      <v-avatar> <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="49" height="50" /> </v-avatar>
+      <v-avatar> <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="47" height="40" /> </v-avatar>
      
       <v-btn variant="plain" to="/about"> Inicio </v-btn>
-      <v-btn variant="plain"> Ticket </v-btn>
+      <v-btn variant="plain" to="/ticket"> Ticket </v-btn>
       <v-btn variant="plain"> Historial </v-btn>
        
       </v-toolbar>

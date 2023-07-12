@@ -68,16 +68,16 @@
 
     ></v-text-field>
     </v-responsive>
-     
-      <v-btn
-        block
-        class="mb-1"
-        color="surface-variant"
-        size="large"
-        variant=""
-      >
-      <RouterLink to="/about">INICIA SESION</RouterLink>
-      </v-btn>
+      <RouterLink to="/about">
+        <v-btn
+          block
+          class="mb-1"
+          color="surface-variant"
+          size="large"
+          variant=""
+        ><div class="log-in">INICIAR SESIÓN</div>
+        </v-btn>
+      </RouterLink>
 
       <v-card-text class="text-center">
         <a
@@ -86,15 +86,16 @@
           rel="noopener noreferrer"
           target="_blank"
         >
-        <v-btn
-        block
-        class="mb-1"
-        size="large"
-        color="surface-variant"
-        variant=""
-        >
-        <RouterLink to="/invitado">INVITADO</RouterLink>
-        </v-btn>
+        <RouterLink to="/invitado">
+          <v-btn
+          block
+          class="mb-1"
+          size="large"
+          color="surface-variant"
+          variant=""
+          ><div class="log-in">INVITADO</div>
+          </v-btn>
+        </RouterLink>
         </a>
       </v-card-text>
     </v-card>
@@ -109,6 +110,9 @@
 <style>
 body {
   background-color:  #424953;
+}
+.log-in { color:  #11be8d;
+
 }
 </style>
 

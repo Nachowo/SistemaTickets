@@ -1,35 +1,29 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar> 
-      <v-toolbar>
-      <v-avatar> <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="47" height="40" /> </v-avatar>
-     
-      <v-btn variant="plain" to="/about"> Inicio </v-btn>
-      <v-btn variant="plain" to="/ticket"> Ticket </v-btn>
-      <v-btn variant="plain"> Historial </v-btn>
-       
+      <v-app-bar> 
+        <v-toolbar>
+        <v-avatar class="icon">
+          <img alt="Vue logo" class="logo" src="@/assets/STULOGO.png" width="47" height="40" />
+        </v-avatar>
+
+        <v-btn variant="plain" to="/about">Inicio</v-btn>
+        <v-btn variant="plain" to="/ticket">Ticket</v-btn>
+        <v-btn variant="plain" to="/historial">Historial</v-btn>
+        <v-spacer></v-spacer> 
+        <v-btn variant="plain" to="/">
+          Cerrar Sesión
+          <v-icon class="icon"><img alt="Cerrar sesión" src="@/assets/cerrar-sesion.png" width="25" height="20" /></v-icon>
+        </v-btn>
       </v-toolbar>
     </v-app-bar>
 
-    <v-navigation-drawer>
-      <v-list>
-        <v-list-item></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-main>
-      Main Content
-    </v-main>
+    <!-- Resto del código -->
   </v-layout>
 </template>
-<!--
+
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+.icon {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 </style>
--->

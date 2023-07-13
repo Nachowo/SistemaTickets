@@ -22,9 +22,12 @@ public class SistemaTicketsApplication {
 
 
         Scanner input = new Scanner(System.in);
-        String nombr;
-        String correo;
-        String pass;
+        String nombr = "Jano";
+        String correo = "jano@usach.cl";
+        String pass = "123";
+        String rol = "OLA";
+
+        Usuario user = new Usuario(nombr,correo,pass,rol);
 
             ///para ingresar usuarios a la bd
             /**
@@ -35,8 +38,8 @@ public class SistemaTicketsApplication {
             System.out.println("Contrasena");
             pass = input.nextLine();
             */
-        System.out.println(ticketService.findTicket( 1L));
-
+        //System.out.println(ticketService.findTicket( 1L));
+        usuarioService.guardarUsuario(user);
     }
 
 

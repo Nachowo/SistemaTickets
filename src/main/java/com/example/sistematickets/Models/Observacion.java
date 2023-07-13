@@ -6,21 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Tickets")
+@Table(name = "Observaciones")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ticket {
+public class Observacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
-    private Long id_ticket;
-    private Long solicitante;
-    private Long analista;
-    private String categoria;
-    private int prioridad;
-    private String estado;
-    private String titulo;
-    private String descripcion;
+    private Long id_observacion;
+    private String tarea;
+    private String clasificacion;
+    private String fecha;
+    private Long usuario;
 
 }

@@ -19,6 +19,7 @@ public class SistemaTicketsApplication {
         ApplicationContext context = SpringApplication.run(SistemaTicketsApplication.class, args);
         UsuarioService usuarioService = context.getBean(UsuarioService.class);
         TicketService ticketService = context.getBean(TicketService.class);
+        UsuarioRepository usuarioRepository = context.getBean(UsuarioRepository.class);
 
 
         Scanner input = new Scanner(System.in);
@@ -27,9 +28,7 @@ public class SistemaTicketsApplication {
         String pass = "123";
         String rol = "OLA";
 
-        Usuario user = new Usuario(nombr,correo,pass,rol);
 
-            ///para ingresar usuarios a la bd
             /**
             System.out.println("Nombre");
             nombr = input.nextLine();
@@ -39,7 +38,25 @@ public class SistemaTicketsApplication {
             pass = input.nextLine();
             */
         //System.out.println(ticketService.findTicket( 1L));
-        usuarioService.guardarUsuario(user);
+
+        System.out.println("usuario Jano y pass 123");
+        if (usuarioService.login(correo,pass)){
+            System.out.println("LOGIN EXITOSO");
+        }
+        System.out.println("Usuario jano y pass 124");
+        if (usuarioService.login(correo,"124")){
+            System.out.println("LOGIN EXITOSO");
+        }else {
+            System.out.println("SALIO BIEN");
+        }
+        System.out.println("Usuario pedro y pass 12");
+        if (usuarioService.login("pedro","12")){
+            System.out.println("LOGIN EXITOSO");
+        }else {
+            System.out.println("SALIO BIEN");
+        }
+        //usuarioService.guardarUsuario(user);
+
     }
 
 

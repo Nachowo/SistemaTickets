@@ -2,6 +2,7 @@ package com.example.sistematickets.Services;
 
 import com.example.sistematickets.Models.Usuario;
 import com.example.sistematickets.repositories.UsuarioRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +21,7 @@ public class UsuarioService {
         this.usuarioRepo = usuarioRepo;
     }
 
-    @PostMapping("/Usuario")
+    @PostMapping("/usuarios")
     @ResponseBody
     public Usuario crear(@RequestBody Usuario usuario){
         return usuarioRepo.save(usuario);
@@ -41,5 +42,15 @@ public class UsuarioService {
 
     public Optional<Usuario> find(Long id){
         return usuarioRepo.findById(id);
+    }
+
+
+    public Boolean login(String correo,String pass){
+        Usuario usuario = usuarioRepo.findByCorreo(correo);
+        if (usuario==null){
+            return false;
+        }
+        return usuario.getContrasena().equals(pass);
+
     }
 }

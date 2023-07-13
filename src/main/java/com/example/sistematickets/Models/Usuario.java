@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +16,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
-    private long id_user;
+    private long id_usuario;
     private String correo;
     private String nombre;
     private String contrasena;
@@ -28,8 +28,8 @@ public class Usuario {
         this.contrasena = pass;
         this.rol = rol;
     }
-
+    /**
     public long getId_user() {
         return id_user;
-    }
+    }*/
 }

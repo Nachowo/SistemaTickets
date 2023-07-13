@@ -18,11 +18,13 @@ public class UsuarioController {
     public UsuarioController(UsuarioService usuarioServices){
         this.usuarioServices = usuarioServices;
     }
-    @PostMapping("/Usuario")
+    @PostMapping("/usuario/crear")
     public void crear(@RequestBody Usuario usuario) {
         usuarioServices.guardarUsuario(usuario);
     }
 
+
+    @PostMapping("/usuario/login")
     public ResponseEntity<?> login(@RequestParam String correo, @RequestParam String pass) {
         if (usuarioServices.login(correo, pass)) {
             return ResponseEntity.ok().build();

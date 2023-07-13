@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="text-center">
       <NavBar />
       <v-container fluid>
         <v-row justify="center">

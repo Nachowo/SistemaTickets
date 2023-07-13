@@ -44,9 +44,10 @@ export default {
   <v-layout class="rounded rounded-md">
     <NavBar />
     <v-main class="custom-heigh centered-content">
-      <v-sheet width="300" class="mx-auto">
+      <v-sheet width="1500" class="mx-auto">
+        <h2 class="Titulo-FORM">SOLICITUD DE TICKET</h2>
         <v-form ref="form">
-          <v-responsive class="mb-6" max-width="550">
+          <v-responsive class="mb-6" max-width="1500">
             <v-text-field label="ID" hide-details="auto"></v-text-field>
           </v-responsive>
 
@@ -96,6 +97,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Opcional: asegura que ocupe el 100% de la altura de la pantalla */
+  min-height: 100vh;
+}
+
+.Titulo-FORM {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 </style>

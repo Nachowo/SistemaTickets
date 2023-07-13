@@ -44,10 +44,10 @@ export default {
   <v-layout class="rounded rounded-md">
     <NavBar />
     <v-main class="custom-heigh centered-content">
-      <v-sheet width="1500" class="mx-auto">
+      <v-sheet width="1800" class="mx-auto redondo">
         <h2 class="Titulo-FORM">SOLICITUD DE TICKET</h2>
         <v-form ref="form">
-          <v-responsive class="mb-6" max-width="1500">
+          <v-responsive class="mb-6" max-width="1800">
             <v-text-field label="ID" hide-details="auto"></v-text-field>
           </v-responsive>
 
@@ -70,7 +70,7 @@ export default {
 
           <div class="d-flex flex-column">
             <v-btn
-              variant="text"
+              variant="tonal"
               color="blue"
               class="mt-7"
               block
@@ -79,7 +79,7 @@ export default {
               Enviar
             </v-btn>
 
-            <v-btn variant="text" color="red" class="mt-7" block @click="reset">
+            <v-btn variant="tonal" color="red" class="mt-7" block @click="reset">
               Restablecer formulario
             </v-btn>
           </div>
@@ -104,5 +104,12 @@ export default {
   font-size: 24px;
   text-align: center;
   margin-bottom: 20px;
+  background-color: #EA7600;
+  color: #394049;
+  border-radius: 10px;
+}
+
+.redondo {
+  border-radius: 10px;
 }
 </style>

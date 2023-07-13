@@ -32,7 +32,7 @@ export default {
       >
         <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
 
-        <v-responsive class="mx-auto" max-width="500">
+        <v-responsive class="mx-auto" max-width="400">
           <v-text-field
             :rules="[rules2.required]"
             clearable
@@ -55,7 +55,7 @@ export default {
           >
         </div>
 
-        <v-responsive class="mx-auto" max-width="500">
+        <v-responsive class="mx-auto" max-width="400">
           <v-text-field
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"

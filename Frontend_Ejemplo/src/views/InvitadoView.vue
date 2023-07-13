@@ -9,8 +9,8 @@
 </script>
 
 <template> 
-    <header>
-        <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="450" height="200" />
+  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="450" height="200" />
   </header>
   
   <div>
@@ -48,16 +48,6 @@
         ><div class="log-in">INICIAR SESIÓN</div>
         </v-btn>
       </RouterLink>
-
-      <v-card-text class="text-center">
-        <a
-          class="text-blue text-decoration-none"
-          href="#"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-        </a>
-      </v-card-text>
     </v-card>
   </div>
 </template>

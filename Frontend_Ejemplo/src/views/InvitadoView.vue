@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .log-in { color:   #00A499;
 }
 </style>

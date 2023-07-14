@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Usuarios
     rol TEXT
 ) ;
 
-CREATE TABLE IF NOT EXISTS SistemaTickets
+CREATE TABLE IF NOT EXISTS Tickets
 (
   id_ticket SERIAL PRIMARY KEY,
   solicitante BIGINT,
@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS SistemaTickets
   estado TEXT,
   titulo TEXT,
   descripcion TEXT,
-  FOREIGN KEY (solicitante) REFERENCES Usuario(id_usuario),
-  FOREIGN KEY (analista) REFERENCES Usuario(id_usuario)
+  FOREIGN KEY (solicitante) REFERENCES Usuarios(id_usuario),
+  FOREIGN KEY (analista) REFERENCES Usuarios(id_usuario)
   
 );
 
@@ -31,5 +31,5 @@ CREATE TABLE IF NOT EXISTS Observaciones
     clasificacion TEXT,
     fecha DATE,
     usuario BIGINT,
-    FOREIGN KEY (usuario) REFERENCES Usuario(id_usuario)
+    FOREIGN KEY (usuario) REFERENCES Usuarios(id_usuario)
 );

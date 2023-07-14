@@ -17,16 +17,14 @@ export default {
       const correo = this.correo;
       const pass = this.pass;
       try{
-        console.log(correo + " " + pass);
         const autorizacion = await axios.post('http://localhost:8080/usuario/login',{
           correo,
             pass
 
         });
-            console.log(autorizacion);
 
             if (autorizacion.status === 200){
-              this.$router.push("/Invitado")
+              this.$router.push("/about")
             }else {
               console.log("no");
             }

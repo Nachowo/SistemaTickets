@@ -47,7 +47,9 @@ public class UsuarioService {
 
     public Boolean login(String correo,String pass){
         Usuario usuario = usuarioRepo.findByCorreo(correo);
+
         if (usuario==null){
+            System.out.println("HAY NULL");
             return false;
         }
         return usuario.getContrasena().equals(pass);

@@ -27,7 +27,7 @@ public class SistemaTicketsApplication {
         String correo = "jano@usach.cl";
         String pass = "123";
         String rol = "OLA";
-
+        String correo2 = "jano@usach.cl";
 
             /**
             System.out.println("Nombre");
@@ -39,22 +39,7 @@ public class SistemaTicketsApplication {
             */
         //System.out.println(ticketService.findTicket( 1L));
 
-        System.out.println("usuario Jano y pass 123");
-        if (usuarioService.login(correo,pass)){
-            System.out.println("LOGIN EXITOSO");
-        }
-        System.out.println("Usuario jano y pass 124");
-        if (usuarioService.login(correo,"124")){
-            System.out.println("LOGIN EXITOSO");
-        }else {
-            System.out.println("SALIO BIEN");
-        }
-        System.out.println("Usuario pedro y pass 12");
-        if (usuarioService.login("pedro","12")){
-            System.out.println("LOGIN EXITOSO");
-        }else {
-            System.out.println("SALIO BIEN");
-        }
+
         //usuarioService.guardarUsuario(user);
 
     }

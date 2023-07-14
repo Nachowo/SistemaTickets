@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     rules: {
@@ -8,7 +9,32 @@ export default {
       required: (value) => !!value || "Correo requerido",
     },
     visible: false,
+    correo: '',
+    pass: ''
   }),
+  methods: {
+    async login(){
+      const correo = this.correo;
+      const pass = this.pass;
+      try{
+        console.log(correo + " " + pass);
+        const autorizacion = await axios.post('http://localhost:8080/usuario/login',{
+          correo,
+            pass
+
+        });
+            console.log(autorizacion);
+
+            if (autorizacion.status === 200){
+              this.$router.push("/Invitado")
+            }else {
+              console.log("no");
+            }
+      }catch{
+        console.error('ERROR');
+      }
+    }
+  }
 };
 </script>
 
@@ -32,8 +58,9 @@ export default {
       >
         <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
 
-        <v-responsive class="mx-auto" max-width="400">
+        <v-responsive class="mx-auto" max-width="500">
           <v-text-field
+            v-model="correo"
             :rules="[rules2.required]"
             clearable
             placeholder="Introduzca su correo"
@@ -55,9 +82,10 @@ export default {
           >
         </div>
 
-        <v-responsive class="mx-auto" max-width="400">
+        <v-responsive class="mx-auto" max-width="500">
           <v-text-field
-            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+              v-model="pass"
+              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
             :rules="[rules.required]"
             clearable
@@ -66,8 +94,9 @@ export default {
             @click:append-inner="visible = !visible"
           ></v-text-field>
         </v-responsive>
-        <RouterLink to="/about">
+
           <v-btn
+              @click="login"
             block
             class="mb-1"
             color="surface-variant"
@@ -75,7 +104,7 @@ export default {
             variant=""
             ><div class="log-in">INICIAR SESIÓN</div>
           </v-btn>
-        </RouterLink>
+
 
         <v-card-text class="text-center">
           <a

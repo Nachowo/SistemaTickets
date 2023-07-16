@@ -1,4 +1,6 @@
 <template>
+
+
   <v-layout class="rounded rounded-md centered-layout">
     <div class="centered-message">
       <h1>
@@ -17,9 +19,9 @@
           </li>
         </ul>
         <br>
-      <v-btn class="button" color="black" variant="outlined" to="/ticket">Ticket</v-btn>
+      <v-btn class="button" color="black" variant="outlined" @click="irATickets" >Ticket</v-btn>
       <v-btn class="button" color="black" variant="outlined" to="/historial">Historial</v-btn>
-        
+
     </div>
     <NavBar />
   </v-layout>
@@ -28,6 +30,19 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 export default {
+  computed:{
+    getID(){
+      return localStorage.getItem("id_usuario");
+    }
+  },
+  methods:{
+    irATickets(){
+      this.$router.push({
+        path: "/ticket"
+      });
+    }
+  },
+
   components: {
     NavBar,
   },

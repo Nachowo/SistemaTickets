@@ -23,4 +23,16 @@ public class Ticket {
     private String titulo;
     private String descripcion;
 
+    public Ticket crearSolicitud(Long solicitante,String categoria, String descripcion){
+        this.setSolicitante(solicitante);
+        this.setCategoria(categoria);
+        this.setDescripcion(descripcion);
+        this.setEstado("pendiente");
+        this.setPrioridad(1);
+        return this;
+    }
+
 }
+
+
+

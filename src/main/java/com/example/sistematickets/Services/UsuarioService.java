@@ -44,7 +44,6 @@ public class UsuarioService {
         return usuarioRepo.findById(id);
     }
 
-
     public Boolean login(String correo,String pass){
         Usuario usuario = usuarioRepo.findByCorreo(correo);
 
@@ -55,4 +54,9 @@ public class UsuarioService {
         return usuario.getContrasena().equals(pass);
 
     }
+
+    public Usuario getUsuario(String correo){
+        return (usuarioRepo.findByCorreo(correo));
+    }
+
 }

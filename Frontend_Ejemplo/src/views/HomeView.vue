@@ -13,23 +13,28 @@ export default {
     pass: ''
   }),
   methods: {
-    async login(){
+    async login() {
       const correo = this.correo;
       const pass = this.pass;
-      try{
-        const autorizacion = await axios.post('http://localhost:8080/usuario/login',{
+
+      try {
+        const autorizacion = await axios.post('http://localhost:8080/usuario/login', {
           correo,
-            pass
-
+          pass
         });
+        if (autorizacion.data.status.statusCodeValue === 200) {
 
-            if (autorizacion.status === 200){
-              this.$router.push("/about")
-            }else {
-              console.log("no");
-            }
-      }catch{
-        console.error('ERROR');
+          localStorage.setItem("id_usuario",autorizacion.data.id.toString());
+          localStorage.setItem("rol_usuario",autorizacion.data.rol);
+          this.$router.push({
+            path: "/about"
+          });
+
+        } else {
+          console.log("Credenciales incorrectas. ");
+        }
+      } catch (error) {
+        console.error('Error al enviar la petición al backend', error);
       }
     }
   }

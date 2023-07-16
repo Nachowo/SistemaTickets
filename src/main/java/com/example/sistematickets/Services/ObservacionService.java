@@ -23,13 +23,6 @@ public class ObservacionService {
         this.observacionRepository = observacionRepository;
     }
 
-    /**
-     @PostMapping("/Ticket")
-     @ResponseBody
-     public Ticket crearTicket(@RequestBody Ticket ticket){
-     return ticketRepository.save(ticket);
-     }
-     */
     public void guardarObservacion(Observacion observacion){
         observacionRepository.save(observacion);
     }

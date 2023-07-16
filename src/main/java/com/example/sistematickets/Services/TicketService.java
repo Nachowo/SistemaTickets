@@ -3,6 +3,7 @@ package com.example.sistematickets.Services;
 import com.example.sistematickets.Models.Ticket;
 import com.example.sistematickets.Models.Usuario;
 import com.example.sistematickets.repositories.TicketRepository;
+import com.example.sistematickets.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
-
+    private UsuarioRepository usuarioRepository;
     @Autowired
     public TicketService(TicketRepository ticketRepository){
         this.ticketRepository = ticketRepository;
@@ -35,5 +36,15 @@ public class TicketService {
     public Optional<Ticket> findTicket(Long id){
         return ticketRepository.findById(id);
     }
+    public boolean existsByCorreo(String correo){
+         if(getIdByCorreo(correo)!=null){
+             return true;
+         }
+         return false;
+    }
+    public Usuario getIdByCorreo(String correo){
+         return usuarioRepository.findByCorreo(correo);
 
+    }
 }
+

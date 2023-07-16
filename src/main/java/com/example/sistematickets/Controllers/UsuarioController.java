@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -26,15 +28,22 @@ public class UsuarioController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Datos datos) {
-        System.out.println("ENTRO");
+    public Map login(@RequestBody Datos datos) {
         String pass = datos.getPass();
         String correo = datos.getCorreo();
-        System.out.println(usuarioServices.login(correo,pass));
         if (usuarioServices.login(correo, pass)) {
-            return ResponseEntity.ok().build();
+            Usuario usuario = usuarioServices.getUsuario(correo);
+            Long id = usuario.getId_usuario();
+            String rol = usuario.getRol();
+            Map<String, Object> retorno = new HashMap<>();
+            retorno.put("status", ResponseEntity.ok().build());
+            retorno.put("id", usuario.getId_usuario());
+            retorno.put("rol",usuario.getRol());
+            return retorno;
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        Map<String, Object> retorno = new HashMap<>();
+        retorno.put("status", ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+        return retorno;
     }
 
 

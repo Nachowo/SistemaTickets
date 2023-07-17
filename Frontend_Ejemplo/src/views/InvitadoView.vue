@@ -16,9 +16,9 @@
     },
     methods:{
       guardarCorreo(){
-        console.log("metodo");
         localStorage.setItem("correo",this.correo);
-        console.log("guarda correo");
+        localStorage.setItem("rol","invitado");
+        localStorage.setItem("id_usuario","null");
         this.$router.push('/ticket');
       },
     }
@@ -39,7 +39,6 @@
       rounded="lg"
     >
     <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
-      {{ getID }}
     <v-responsive
     class="mx-auto"
     max-width="400"
@@ -47,7 +46,7 @@
     <v-text-field
         v-model="correoInvitado"
       :rules="[rules3.required]"
-      clearable
+        clearable=""
       hide-details="auto"
       label="Direccion de correo electronico"
       placeholder="carlos.vera@usach.cl"

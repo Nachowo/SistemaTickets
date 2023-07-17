@@ -25,12 +25,12 @@ export default {
     items: ["Mantención", "Soporte"],
     checkbox: false,
     descripcion:'',
-    correo2: localStorage.getItem("correo"),
+    titulo:'',
 
   }),
   computed:{
     estaRegistrado(){
-      return localStorage.getItem("id_usuario")===null;
+      return localStorage.getItem("id_usuario")==="null";
     },
     getID(){
       return localStorage.getItem("id_usuario");
@@ -51,15 +51,36 @@ export default {
 
     async send(){
 
-      const id_usuario=localStorage.getItem("id_usuario");
+      const titulo=this.titulo;
       const categoria=this.categoria;
       const descripcion = this.descripcion;
-      try {
-        const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicket',{id_usuario,categoria,descripcion});
-        if(hecho){alert("SE REALIZO EL TICKET");}
-      }catch{
-        alert("NO SE HIZO EL TICKET");
+/**
+      if(localStorage.getItem("rol")==="invitado"){
+        const correo = localStorage.getItem("correo");
+        try {
+          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicketInv',{correo,categoria,descripcion});
+        }catch{
+          console.log("error ticket invitado")
+        }
+        */
+      if(false){
+
+      }else{
+        const id_usuario=localStorage.getItem("id_usuario");
+        try {
+          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicket',{id_usuario,categoria,descripcion});
+
+        }catch{
+          alert("error ticket como registrado");
+        }
       }
+      if(hecho){
+        alert("SE REALIZO EL TICKET");
+      }else{
+        alert("Error al realizar ticket");
+      }
+
+
     }
   },
 };

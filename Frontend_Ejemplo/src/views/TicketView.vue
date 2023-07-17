@@ -24,7 +24,8 @@ export default {
     categoria: null,
     items: ["Mantención", "Soporte"],
     checkbox: false,
-    descripcion:''
+    descripcion:'',
+    correo2: localStorage.getItem("correo"),
 
   }),
   computed:{
@@ -73,21 +74,19 @@ export default {
         <h2 class="Titulo-FORM">SOLICITUD DE TICKET</h2>
         <v-form ref="form">
 
-          <template v-if="estaRegistrado">
-            <v-responsive class="mb-6" max-width="1800">
-              <v-text-field label="ID" hide-details="auto"></v-text-field>
-            </v-responsive>
-          </template>
+          <v-responsive class="mb-6" max-width="1800">
+            <v-text-field
+                v-model="titulo"
+                :rules="emailRules"
+                label="Titulo"
+                required
+            ></v-text-field>
+          </v-responsive>
 
-          <v-text-field
-            v-model="correo"
-            :rules="emailRules"
-            label="Direccion de correo electronico"
-            required
-          ></v-text-field>
 
           <v-select
             v-model="categoria"
+
             :items="items"
             :rules="[(v) => !!v || 'Seleccione alguna categoria']"
             label="Categoria"

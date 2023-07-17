@@ -1,10 +1,28 @@
 <script>
+  import router from "@/router";
+
   export default {
     data: () => ({
       rules3: {
         required: value => !!value || 'Correo requerido',
       },
+      correoInvitado:'',
     }),
+    computed:{
+      getID(){
+        return localStorage.getItem("id_usuario");
+      }
+
+    },
+    methods:{
+      guardarCorreo(){
+        console.log("metodo");
+        localStorage.setItem("correo",this.correo);
+        console.log("guarda correo");
+        this.$router.push('/ticket');
+      },
+    }
+
   }
 </script>
 
@@ -21,11 +39,13 @@
       rounded="lg"
     >
     <div class="text-subtitle-1 text-medium-emphasis">Cuenta</div>
+      {{ getID }}
     <v-responsive
     class="mx-auto"
     max-width="400"
   >
     <v-text-field
+        v-model="correoInvitado"
       :rules="[rules3.required]"
       clearable
       hide-details="auto"
@@ -38,16 +58,16 @@
           Estimado usuario se le solicita escribir algun correo el cual podamos comunicarnos para efecto de seguimiento de su ticket.
         </v-card-text>
 
-        <RouterLink to="/about">
+
         <v-btn
-          block
-          class="mb-1"
-          color="surface-variant"
-          size="large"
-          variant=""
-        ><div class="log-in">INICIAR SESIÓN</div>
+            class="mb-1"
+            color="surface-variant"
+            size="large"
+            variant=""
+            @click="guardarCorreo"
+        ><div class="log-in">HACER TICKET</div>
         </v-btn>
-      </RouterLink>
+
     </v-card>
   </div>
 </template>

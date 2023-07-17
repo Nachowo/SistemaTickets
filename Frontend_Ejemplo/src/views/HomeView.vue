@@ -34,6 +34,7 @@ export default {
           console.log("Credenciales incorrectas. ");
         }
       } catch (error) {
+        alert("Error de conexión");
         console.error('Error al enviar la petición al backend', error);
       }
     }
@@ -99,13 +100,12 @@ export default {
         </v-responsive>
 
           <v-btn
+              class="mb-1"
+              color="surface-variant"
+              size="large"
+              variant=""
               @click="login"
-            block
-            class="mb-1"
-            color="surface-variant"
-            size="large"
-            variant=""
-            ><div class="log-in">INICIAR SESIÓN</div>
+          ><div class="log-in">INICIAR SESIÓN</div>
           </v-btn>
 
 
@@ -118,7 +118,6 @@ export default {
           >
             <RouterLink to="/invitado">
               <v-btn
-                block
                 class="mb-1"
                 size="large"
                 color="surface-variant"

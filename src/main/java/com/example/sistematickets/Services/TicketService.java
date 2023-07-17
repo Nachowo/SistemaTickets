@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +47,10 @@ public class TicketService {
          return usuarioRepository.findByCorreo(correo);
 
     }
+
+    public List<Ticket> getAllTickets(){
+        return ticketRepository.findAll();
+    }
+
 }
 

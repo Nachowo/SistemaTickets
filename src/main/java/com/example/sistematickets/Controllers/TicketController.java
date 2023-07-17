@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -28,8 +30,10 @@ public class TicketController {
         Ticket ticket = new Ticket().crearSolicitud(Long.parseLong(id_usuario),categoria,descripcion);
         ticketService.guardarTicket(ticket);
         return ResponseEntity.ok().build();
-
-
     }
-
+    @GetMapping("/listarTickets")
+    public List<Ticket> listarTickets(){
+        List<Ticket> lista = ticketService.getAllTickets();
+        return lista;
+    }
 }

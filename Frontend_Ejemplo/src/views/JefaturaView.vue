@@ -23,6 +23,9 @@ export default {
 
 </script>
 <template>
-
-
+  <div>
+    <h1>Listado de tickets</h1>
+    <li v-for="ticket in tickets" :key="ticket.id_ticket"></li>
+      {{ticket.ticket_titulo}}
+  </div>
 </template>

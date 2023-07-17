@@ -38,7 +38,7 @@ public class SistemaTicketsApplication {
             pass = input.nextLine();
             */
         //System.out.println(ticketService.findTicket( 1L));
-
+        System.out.println(ticketService.getAllTickets());
 
         //usuarioService.guardarUsuario(user);
 

@@ -125,6 +125,16 @@ export default {
                 ><div class="log-in">INVITADO</div>
               </v-btn>
             </RouterLink>
+            <RouterLink to="/jefatura">
+              <v-btn
+                  block
+                  class="mb-1"
+                  color="surface-variant"
+                  size="large"
+                  variant=""
+              ><div class="log-in">ANALISTA</div>
+              </v-btn>
+            </RouterLink>
           </a>
         </v-card-text>
       </v-card>

@@ -12,6 +12,7 @@
             height="150"/>
       </h1>
         <p class="titulo">BIENVENIDO AL SISTEMA DE TICKET USACH</p>
+
         <br>
         <ul>
           <li>
@@ -37,7 +38,9 @@ export default {
   },
   methods:{
     irATickets(){
+      console.log(localStorage.getItem("rol_usuario"));
       this.$router.push({
+
         path: "/ticket"
       });
     }

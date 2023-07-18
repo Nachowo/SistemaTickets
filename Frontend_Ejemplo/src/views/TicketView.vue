@@ -54,36 +54,43 @@ export default {
       const titulo=this.titulo;
       const categoria=this.categoria;
       const descripcion = this.descripcion;
-/**
-      if(localStorage.getItem("rol")==="invitado"){
+      console.log(localStorage.getItem("rol_usuario"));
+      console.log(localStorage.getItem("rol_usuario")==="invitado");
+      console.log(localStorage.getItem("rol_usuario")==="registrado")
+
+
+      if(localStorage.getItem("rol_usuario")==="invitado") {
+        console.log("invitado");
         const correo = localStorage.getItem("correo");
         try {
-          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicketInv',{correo,categoria,descripcion});
-        }catch{
+          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicketInv', {
+            titulo,
+            correo,
+            categoria,
+            descripcion
+          });
+        } catch {
           console.log("error ticket invitado")
         }
-        */
-      if(false){
-
-      }else{
+      }
+      else if(localStorage.getItem("rol_usuario")==="registrado"){
         const id_usuario=localStorage.getItem("id_usuario");
         try {
-          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicket',{id_usuario,categoria,descripcion});
-
+          const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicket',{id_usuario,titulo,categoria,descripcion});
+          if(hecho.status){
+            alert("SE REALIZO EL TICKET");
+          }else{
+            alert("Error al realizar ticket");
+          }
         }catch{
-          alert("error ticket como registrado");
+          alert("Error de comunicacion con el backend");
         }
-      }
-      if(hecho){
-        alert("SE REALIZO EL TICKET");
-      }else{
-        alert("Error al realizar ticket");
+
       }
 
 
-    }
-  },
-};
+  }
+}};
 </script>
 
 <template>
@@ -98,7 +105,6 @@ export default {
           <v-responsive class="mb-6" max-width="1800">
             <v-text-field
                 v-model="titulo"
-                :rules="emailRules"
                 label="Titulo"
                 required
             ></v-text-field>

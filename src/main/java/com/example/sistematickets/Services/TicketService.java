@@ -23,13 +23,7 @@ public class TicketService {
         this.ticketRepository = ticketRepository;
     }
 
-    /**
-     @PostMapping("/Ticket")
-     @ResponseBody
-     public Ticket crearTicket(@RequestBody Ticket ticket){
-     return ticketRepository.save(ticket);
-     }
-     */
+
      public void guardarTicket(Ticket ticket){
         ticketRepository.save(ticket);
      }
@@ -54,6 +48,9 @@ public class TicketService {
     public List<Ticket> getTicketsNoAsignados(){
         return ticketRepository.getTicketNoAsignado()   ;
     }
+    public List<Ticket> getByUsuario(Long usuario){
+        System.out.println("service");
+        return ticketRepository.getByUser(usuario);}
 
 
 }

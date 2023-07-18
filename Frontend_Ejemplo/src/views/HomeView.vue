@@ -23,12 +23,18 @@ export default {
           pass
         });
         if (autorizacion.data.status.statusCodeValue === 200) {
-
+          const rol = autorizacion.data.rol;
           localStorage.setItem("id_usuario",autorizacion.data.id.toString());
-          localStorage.setItem("rol_usuario",autorizacion.data.rol);
-          this.$router.push({
-            path: "/about"
-          });
+          localStorage.setItem("rol_usuario",autorizacion.data.rol.toString());
+
+          console.log("/"+rol);
+          console.log(rol);
+          //if(rol==="registrado"){
+            this.$router.push("/about");
+          //}
+          //this.$router.push("/"+rol);
+
+
 
         } else {
           console.log("Credenciales incorrectas. ");

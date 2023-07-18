@@ -23,9 +23,9 @@
                     :key="ticket.id"
                     :class="index % 2 === 1 ? 'color-intermedio' : ''"
                   >
-                    <td class="text-left py-4">{{ ticket.id }}</td>
-                    <td class="text-left py-4">{{ ticket.nombre }}</td>
-                    <td class="text-left py-4">{{ ticket.fecha }}</td>
+                    <td class="text-left py-4">{{ ticket.id_ticket }}</td>
+                    <td class="text-left py-4">{{ ticket.titulo }}</td>
+                    //<td class="text-left py-4">{{ ticket.fecha }}</td>
                     <td class="text-left py-4">{{ ticket.categoria }}</td>
                     <td>
                       <v-icon small @click="verDetalle(ticket)" class="icon"
@@ -45,36 +45,36 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import axios from "axios";
 export default {
   components: {
     NavBar,
   },
   data() {
     return {
-      historialTickets: [
-        {
-          id: 1,
-          nombre: "Ticket 1",
-          fecha: "2022-01-01",
-          categoria: "Soporte",
-        },
-        {
-          id: 2,
-          nombre: "Ticket 2",
-          fecha: "2022-01-02",
-          categoria: "Soporte",
-        },
-        {
-          id: 3,
-          nombre: "Ticket 3",
-          fecha: "2022-01-03",
-          categoria: "Mantención",
-        },
-        // Agrega aquí más objetos de ticket según tu historial
-      ],
+      historialTickets: [],
     };
   },
+  mounted() {
+    this.getTickets(localStorage.getItem("id_usuario"));
+
+  },
   methods: {
+    async getTickets(usuario){
+      console.log(usuario);
+      try{
+        const respuesta = await axios.get('http://localhost:8080/ticket/obtenerTicketsUsuario',{
+          params:{
+            "id_usuario": usuario,
+          }
+        });
+        console.log("entrego respuesta");
+        console.log(respuesta.data);
+        this.historialTickets = respuesta.data;
+      }catch{
+        console.log("error con los tickets");
+      }
+    },
     verDetalle(ticket) {
       // Lógica para ver el detalle del ticket
       console.log("Ticket seleccionado:", ticket);

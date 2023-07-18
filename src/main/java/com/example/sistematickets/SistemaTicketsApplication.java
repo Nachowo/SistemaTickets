@@ -1,5 +1,6 @@
 package com.example.sistematickets;
 
+import com.example.sistematickets.Controllers.TicketController;
 import com.example.sistematickets.Models.Usuario;
 
 import com.example.sistematickets.Services.TicketService;
@@ -10,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -20,6 +23,7 @@ public class SistemaTicketsApplication {
         UsuarioService usuarioService = context.getBean(UsuarioService.class);
         TicketService ticketService = context.getBean(TicketService.class);
         UsuarioRepository usuarioRepository = context.getBean(UsuarioRepository.class);
+        TicketController ticketController = context.getBean(TicketController.class);
 
 
         Scanner input = new Scanner(System.in);
@@ -38,7 +42,6 @@ public class SistemaTicketsApplication {
             pass = input.nextLine();
             */
         //System.out.println(ticketService.findTicket( 1L));
-        System.out.println(ticketService.getAllTickets());
 
         //usuarioService.guardarUsuario(user);
 

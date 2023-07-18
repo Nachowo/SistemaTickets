@@ -16,6 +16,7 @@ public class Ticket {
     @Column(unique = true,nullable = false)
     private Long id_ticket;
     private Long solicitante;
+    
     private Long analista;
     private String categoria;
     private int prioridad;
@@ -23,8 +24,18 @@ public class Ticket {
     private String titulo;
     private String descripcion;
 
-    public Ticket crearSolicitud(Long solicitante,String categoria, String descripcion){
+    public Ticket crearSolicitud(Long solicitante,String titulo,String categoria, String descripcion){
+        this.setTitulo(titulo);
         this.setSolicitante(solicitante);
+        this.setCategoria(categoria);
+        this.setDescripcion(descripcion);
+        this.setEstado("pendiente");
+        this.setPrioridad(1);
+        return this;
+    }
+    public Ticket crearSolicitudInv(Long id,String correo,String titulo,String categoria, String descripcion){
+        this.setTitulo(titulo);
+        //this.setSolicitante(solicitante);
         this.setCategoria(categoria);
         this.setDescripcion(descripcion);
         this.setEstado("pendiente");

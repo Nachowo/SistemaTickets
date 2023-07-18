@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS Tickets
 (
   id_ticket SERIAL PRIMARY KEY,
   solicitante BIGINT,
+  correo TEXT,
   analista BIGINT,
   categoria TEXT,
   prioridad INTEGER,
@@ -33,3 +34,16 @@ CREATE TABLE IF NOT EXISTS Observaciones
     usuario BIGINT,
     FOREIGN KEY (usuario) REFERENCES Usuarios(id_usuario)
 );
+
+INSERT INTO usuarios(id_usuario,correo,nombre,contrasena,rol)
+VALUES (0,null,null,null,'invitado');
+
+INSERT INTO usuarios(id_usuario,correo,nombre,contrasena,rol)
+VALUES (1,'jano@usach.cl','jano','123','registrado');
+
+INSERT INTO usuarios(id_usuario,correo,nombre,contrasena,rol)
+VALUES (2,'jefatura@usach.cl','jefatura','123','jefatura');
+
+INSERT INTO usuarios(id_usuario,correo,nombre,contrasena,rol)
+VALUES (3,'analista@usach.cl','analista','123','analista');
+

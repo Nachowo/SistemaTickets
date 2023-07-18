@@ -8,19 +8,16 @@
       },
       correoInvitado:'',
     }),
-    computed:{
-      getID(){
-        return localStorage.getItem("id_usuario");
-      }
 
-    },
     methods:{
       guardarCorreo(){
-        localStorage.setItem("correo",this.correo);
-        localStorage.setItem("rol","invitado");
-        localStorage.setItem("id_usuario","null");
+        console.log(this.correoInvitado);
+        localStorage.setItem("correo_usuario",this.correoInvitado);
+        localStorage.setItem("rol_usuario","invitado");
+        localStorage.setItem("id_usuario","0");
+        console.log("paso");
         this.$router.push('/ticket');
-      },
+      }
     }
 
   }
@@ -59,11 +56,10 @@
 
 
         <v-btn
+            @click="guardarCorreo"
             class="mb-1"
             color="surface-variant"
             size="large"
-            variant=""
-            @click="guardarCorreo"
         ><div class="log-in">HACER TICKET</div>
         </v-btn>
 

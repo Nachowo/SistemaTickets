@@ -26,16 +26,12 @@ export default {
           const rol = autorizacion.data.rol;
           localStorage.setItem("id_usuario",autorizacion.data.id.toString());
           localStorage.setItem("rol_usuario",autorizacion.data.rol.toString());
-
-          console.log("/"+rol);
-          console.log(rol);
-          //if(rol==="registrado"){
+          localStorage.setItem("correo_usuario",correo);
+          if(rol==="registrado"){
             this.$router.push("/about");
-          //}
-          //this.$router.push("/"+rol);
-
-
-
+          }else {
+            this.$router.push("/"+rol);
+          }
         } else {
           console.log("Credenciales incorrectas. ");
         }
@@ -138,7 +134,7 @@ export default {
                   color="surface-variant"
                   size="large"
                   variant=""
-              ><div class="log-in">ANALISTA</div>
+              ><div class="log-in">jefatura</div>
               </v-btn>
             </RouterLink>
           </a>

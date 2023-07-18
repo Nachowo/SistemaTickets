@@ -27,8 +27,9 @@ public class TicketController {
         String id_usuario = (String) consulta.get("id_usuario");
         String categoria = (String) consulta.get("categoria");
         String descripcion = (String) consulta.get("descripcion");
+        String correo = (String) consulta.get("correo");
 
-        Ticket ticket = new Ticket().crearSolicitud(Long.parseLong(id_usuario),titulo,categoria,descripcion);
+        Ticket ticket = new Ticket().crearSolicitud(Long.parseLong(id_usuario),correo,titulo,categoria,descripcion);
         ticketService.guardarTicket(ticket);
         System.out.println("ticket guardado");
         System.out.println(ResponseEntity.ok().build());
@@ -37,7 +38,7 @@ public class TicketController {
     @PostMapping("/EnviarTicketInv")
     public ResponseEntity<?> RecibirInv(@RequestBody Map<String,Object> consulta){
         String titulo = (String) consulta.get("titulo");
-        String correo = (String) consulta.get("id_usuario");
+        String correo = (String) consulta.get("correo");
         String categoria = (String) consulta.get("categoria");
         String descripcion = (String) consulta.get("descripcion");
 

@@ -51,6 +51,10 @@ public class TicketService {
     public List<Ticket> getAllTickets(){
         return ticketRepository.findAll();
     }
+    public List<Ticket> getTicketsNoAsignados(){
+        return ticketRepository.getTicketNoAsignado()   ;
+    }
+
 
 }
 

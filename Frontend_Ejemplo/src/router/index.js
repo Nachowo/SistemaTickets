@@ -10,8 +10,8 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path:'/analista',
-      name: 'analista',
+      path:'/jefatura',
+      name: 'jefatura',
       component: () => import('../views/JefaturaView.vue')
     },
     {

@@ -31,9 +31,9 @@ public class TicketController {
         ticketService.guardarTicket(ticket);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/listarTickets")
+    @GetMapping("/listarTicketsJefatura")
     public List<Ticket> listarTickets(){
-        List<Ticket> lista = ticketService.getAllTickets();
+        List<Ticket> lista = ticketService.getTicketsNoAsignados();
         return lista;
     }
 }

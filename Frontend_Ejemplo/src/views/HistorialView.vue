@@ -25,16 +25,21 @@
                   >
                     <td class="text-left py-4">{{ ticket.id_ticket }}</td>
                     <td class="text-left py-4">{{ ticket.titulo }}</td>
-                    <td class="text-left py-4">{{ darFormatoFecha(ticket.creacion)}}</td>
+                    <td class="text-left py-4">
+                      {{ darFormatoFecha(ticket.creacion) }}
+                    </td>
                     <td class="text-left py-4">{{ ticket.categoria }}</td>
                     <td>
-
                       <v-btn
-                          block
-                          class="mb-1"
-                          color=#EA7600
-                          background-color=#394049
-                      ><div class="log-in">Revisar ticket</div>
+                        block
+                        class="mb-1"
+                        color="#EA7600"
+                        background-color="#394049"
+                        @click="
+                          this.contenido = ticket;
+                          ventanita = true;
+                        "
+                        ><div class="log-in">Revisar ticket</div>
                       </v-btn>
                     </td>
                   </tr>
@@ -46,56 +51,96 @@
       </v-container>
     </v-main>
   </v-app>
+  <div>
+    <div v-if="ventanita" class="modal">
+      <div class="modal-overlay" @click="ventanita = false"></div>
+      <div class="modal-content">
+        <div>ID: {{ contenido.id_ticket }}</div>
+        <div>Fecha de creación: {{ contenido.creacion }}</div>
+        <div>Titulo: {{ contenido.titulo }}</div>
+        <div>Descripción: {{ contenido.descripcion }}</div>
+        <div>Estado: {{ contenido.estado }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import NavBar from "../components/NavBar.vue";
 import axios from "axios";
-import {darFormatoFecha} from '../extras';
 export default {
-  computed: {
-    formato() {
-      return formato
-    }
-  },
-
   components: {
     NavBar,
   },
+
   data() {
     return {
+      contenido: "",
+      ventanita: false,
       historialTickets: [],
-      fecha: "YYYY-MM-DD HH:mm"
     };
   },
   mounted() {
     this.getTickets(localStorage.getItem("id_usuario"));
-
   },
   methods: {
-    darFormatoFecha,
-
-    async getTickets(usuario){
+    darFormatoFecha(fecha) {
+      return new Intl.DateTimeFormat("es-ES", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(fecha));
+    },
+    async getTickets(usuario) {
       console.log(usuario);
-      try{
-        const respuesta = await axios.get('http://localhost:8080/ticket/obtenerTicketsUsuario',{
-          params:{
-            "id_usuario": usuario,
+      try {
+        const respuesta = await axios.get(
+          "http://localhost:8080/ticket/obtenerTicketsUsuario",
+          {
+            params: {
+              id_usuario: usuario,
+            },
           }
-        });
+        );
         this.historialTickets = respuesta.data;
-      }catch{
+      } catch {
         console.log("error con los tickets");
       }
-    },
-    verDetalle(ticket) {
-      console.log("Ticket seleccionado:", ticket);
     },
   },
 };
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 10;
+}
 .v-data-table {
   width: 100%;
   border: 5px solid #000000;

@@ -9,42 +9,44 @@ export default {
       required: (value) => !!value || "Correo requerido",
     },
     visible: false,
-    correo: '',
-    pass: ''
+    correo: "",
+    pass: "",
   }),
   methods: {
     async login() {
       const correo = this.correo;
       const pass = this.pass;
-      if(correo==="a@a.cl"){
+      if (correo === "a@a.cl") {
         this.$router.push("/about");
-
       }
 
       try {
-        const autorizacion = await axios.post('http://localhost:8080/usuario/login', {
-          correo,
-          pass
-        });
+        const autorizacion = await axios.post(
+          "http://localhost:8080/usuario/login",
+          {
+            correo,
+            pass,
+          }
+        );
         if (autorizacion.data.status.statusCodeValue === 200) {
           const rol = autorizacion.data.rol;
-          localStorage.setItem("id_usuario",autorizacion.data.id.toString());
-          localStorage.setItem("rol_usuario",autorizacion.data.rol.toString());
-          localStorage.setItem("correo_usuario",correo);
-          if(rol==="registrado"){
+          localStorage.setItem("id_usuario", autorizacion.data.id.toString());
+          localStorage.setItem("rol_usuario", autorizacion.data.rol.toString());
+          localStorage.setItem("correo_usuario", correo);
+          if (rol === "registrado") {
             this.$router.push("/about");
-          }else {
-            this.$router.push("/"+rol);
+          } else {
+            this.$router.push("/" + rol);
           }
         } else {
           console.log("Credenciales incorrectas. ");
         }
       } catch (error) {
         alert("Error de conexión");
-        console.error('Error al enviar la petición al backend', error);
+        console.error("Error al enviar la petición al backend", error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -94,8 +96,8 @@ export default {
 
         <v-responsive class="mx-auto" max-width="500">
           <v-text-field
-              v-model="pass"
-              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+            v-model="pass"
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
             :rules="[rules.required]"
             clearable
@@ -105,15 +107,14 @@ export default {
           ></v-text-field>
         </v-responsive>
 
-          <v-btn
-              class="mb-1"
-              color="surface-variant"
-              size="large"
-              variant=""
-              @click="login"
+        <v-btn
+          class="mb-1"
+          color="surface-variant"
+          size="large"
+          variant=""
+          @click="login"
           ><div class="log-in">INICIAR SESIÓN</div>
-          </v-btn>
-
+        </v-btn>
 
         <v-card-text class="text-center">
           <a
@@ -133,12 +134,12 @@ export default {
             </RouterLink>
             <RouterLink to="/jefatura">
               <v-btn
-                  block
-                  class="mb-1"
-                  color="surface-variant"
-                  size="large"
-                  variant=""
-              ><div class="log-in">jefatura</div>
+                block
+                class="mb-1"
+                color="surface-variant"
+                size="large"
+                variant=""
+                ><div class="log-in">jefatura</div>
               </v-btn>
             </RouterLink>
           </a>
@@ -174,7 +175,3 @@ body {
   align-items: center;
 }
 </style>
-
-
-
-

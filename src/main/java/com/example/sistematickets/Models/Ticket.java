@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "Tickets")
 @Data
@@ -23,8 +25,9 @@ public class Ticket {
     private String titulo;
     private String descripcion;
     private String correo;
+    private Timestamp creacion;
 
-    public Ticket crearSolicitud(Long solicitante,String correo,String titulo,String categoria, String descripcion){
+    public Ticket crearSolicitud(Long solicitante,String correo,String titulo,String categoria, String descripcion,Timestamp fecha){
         this.setTitulo(titulo);
         this.setCorreo(correo);
         this.setSolicitante(solicitante);
@@ -32,12 +35,11 @@ public class Ticket {
         this.setDescripcion(descripcion);
         this.setEstado("pendiente");
         this.setPrioridad(1);
-        System.out.println(this);
+        this.setCreacion(fecha);
         return this;
     }
     public Ticket crearSolicitudInv(Long id,String correo,String titulo,String categoria, String descripcion){
         this.setTitulo(titulo);
-        //this.setSolicitante(solicitante);
         this.setCategoria(categoria);
         this.setDescripcion(descripcion);
         this.setEstado("pendiente");

@@ -25,9 +25,10 @@
                   >
                     <td class="text-left py-4">{{ ticket.id_ticket }}</td>
                     <td class="text-left py-4">{{ ticket.titulo }}</td>
-                    <td class="text-left py-4">{{ ticket.fecha }}</td>
+                    <td class="text-left py-4">{{ formato(ticket.creacion)}}</td>
                     <td class="text-left py-4">{{ ticket.categoria }}</td>
                     <td>
+
                       <v-btn
                           block
                           class="mb-1"
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       historialTickets: [],
+      fecha: "YYYY-MM-DD HH:mm"
     };
   },
   mounted() {
@@ -64,6 +66,9 @@ export default {
 
   },
   methods: {
+    formato(fecha){
+      return new Intl.DateTimeFormat("es-ES",{dateStyle:"medium", timeStyle:"short"}).format(new Date(fecha));
+    },
     async getTickets(usuario){
       console.log(usuario);
       try{
@@ -72,15 +77,12 @@ export default {
             "id_usuario": usuario,
           }
         });
-        console.log("entrego respuesta");
-        console.log(respuesta.data);
         this.historialTickets = respuesta.data;
       }catch{
         console.log("error con los tickets");
       }
     },
     verDetalle(ticket) {
-      // Lógica para ver el detalle del ticket
       console.log("Ticket seleccionado:", ticket);
     },
   },
@@ -90,17 +92,17 @@ export default {
 <style scoped>
 .v-data-table {
   width: 100%;
-  border: 5px solid #000000; /* Agrega un borde a la tabla */
+  border: 5px solid #000000;
 }
 
 .v-data-table thead th {
   white-space: normal;
-  border-bottom: 1px solid #000000; /* Agrega un borde inferior a las celdas del encabezado */
+  border-bottom: 1px solid #000000;
 }
 
 .v-data-table tbody td {
   white-space: nowrap;
-  border-bottom: 1px solid #000000; /* Agrega un borde inferior a las celdas del cuerpo */
+  border-bottom: 1px solid #000000;
 }
 
 .color-intermedio {

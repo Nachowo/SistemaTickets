@@ -24,8 +24,8 @@ public class TicketService {
     }
 
 
-     public void guardarTicket(Ticket ticket){
-        ticketRepository.save(ticket);
+     public Ticket guardarTicket(Ticket ticket){
+        return ticketRepository.save(ticket);
      }
 
     public Optional<Ticket> findTicket(Long id){
@@ -53,9 +53,9 @@ public class TicketService {
         return ticketRepository.getTicketNoAsignado()   ;
     }
     public List<Ticket> getByUsuario(Long usuario){
-        System.out.println("service");
         return ticketRepository.getByUser(usuario);}
 
-
+    public List<Ticket> getByAnalista(Long usuario){
+        return ticketRepository.getByAnalista(usuario);}
 }
 

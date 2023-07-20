@@ -54,28 +54,17 @@ export default {
       const titulo=this.titulo;
       const categoria=this.categoria;
       const descripcion = this.descripcion;
-      console.log(localStorage.getItem("id_usuario"));
-      console.log(localStorage.getItem("rol_usuario"));
-      console.log(localStorage.getItem("rol_usuario")==="invitado");
-      console.log(localStorage.getItem("rol_usuario")==="registrado")
 
 
       if(localStorage.getItem("rol_usuario")==="invitado") {
-        console.log("invitado");
         const correo = localStorage.getItem("correo_usuario");
         try {
-          console.log("try");
           const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicketInv', {
             titulo,
             correo,
             categoria,
             descripcion
           });
-          console.log(titulo);
-          console.log(correo);
-          console.log(categoria);
-          console.log(descripcion);
-          console.log(hecho.data);
           alert("ticket realizado");
         } catch {
           console.log("error ticket invitado")
@@ -86,6 +75,13 @@ export default {
         const correo = localStorage.getItem("correo_usuario");
         try {
           const hecho = await axios.post('http://localhost:8080/ticket/EnviarTicket',{id_usuario,correo,titulo,categoria,descripcion});
+
+          const observacion = {
+            tarea: "Creacion",
+            usuario: id_usuario,
+            ticket: hecho.data,
+          };
+          const obs = await axios.post('http://localhost:8080/Observaciones/generarObs',observacion);
           if(hecho.status){
             alert("SE REALIZO EL TICKET");
           }else{

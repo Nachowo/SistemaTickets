@@ -21,11 +21,11 @@ public class UsuarioController {
     public UsuarioController(UsuarioService usuarioServices){
         this.usuarioServices = usuarioServices;
     }
+
     @PostMapping("/crear")
     public void crear(@RequestBody Usuario usuario) {
         usuarioServices.guardarUsuario(usuario);
     }
-
 
     @PostMapping("/login")
     public Map login(@RequestBody Datos datos) {

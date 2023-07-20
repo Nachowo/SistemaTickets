@@ -1,13 +1,16 @@
 package com.example.sistematickets.Controllers;
 
+import com.example.sistematickets.Models.Observacion;
 import com.example.sistematickets.Models.Ticket;
-import com.example.sistematickets.Models.Usuario;
 import com.example.sistematickets.Services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,13 +31,12 @@ public class TicketController {
         String categoria = (String) consulta.get("categoria");
         String descripcion = (String) consulta.get("descripcion");
         String correo = (String) consulta.get("correo");
-
-        Ticket ticket = new Ticket().crearSolicitud(Long.parseLong(id_usuario),correo,titulo,categoria,descripcion);
-        ticketService.guardarTicket(ticket);
-        System.out.println("ticket guardado");
-        System.out.println(ResponseEntity.ok().build());
-        return ResponseEntity.ok().build();
+        Timestamp fecha = new Timestamp(System.currentTimeMillis());
+        Ticket ticket = new Ticket().crearSolicitud(Long.parseLong(id_usuario),correo,titulo,categoria,descripcion,fecha);
+        String id = ticketService.guardarTicket(ticket).getId_ticket().toString();
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
     @PostMapping("/EnviarTicketInv")
     public ResponseEntity<?> RecibirInv(@RequestBody Map<String,Object> consulta){
         String titulo = (String) consulta.get("titulo");
@@ -46,19 +48,12 @@ public class TicketController {
         ticketService.guardarTicket(ticket);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping("/listarTicketsJefatura")
     public List<Ticket> listarTickets(){
-        List<Ticket> lista = ticketService.getTicketsNoAsignados();
-        return lista;
+        return ticketService.getTicketsNoAsignados();
     }
 
-    /**
-    @PutMapping("/derivarTicket")
-    public void derivarTicket(@RequestBody Map<String,Object> consulta){
-        String x = consulta.get("id_ticket").toString();
-        Long id_ticket = Long.parseLong(x);
-        ticketService.derivar(id_ticket);
-    }*/
     @PostMapping("/derivarTicket")
     public ResponseEntity<?> derivarTicket(@RequestBody Ticket ticket){
         try{
@@ -71,11 +66,16 @@ public class TicketController {
 
     }
 
-
     @GetMapping("/obtenerTicketsUsuario")
     public List<Ticket> obtenerTicketsUsuario(@RequestParam("id_usuario") String id){
-        System.out.println("controlador");
         Long id_usuario = Long.parseLong(id);
         return ticketService.getByUsuario(id_usuario);
+    }
+
+    @GetMapping("/obtenerTicketsAnalista")
+    public List<Ticket> obtenerTicketsAnalista(@RequestParam("analista") String id){
+        Long id_usuario = Long.parseLong(id);
+        System.out.println(id);
+        return ticketService.getByAnalista(id_usuario);
     }
 }

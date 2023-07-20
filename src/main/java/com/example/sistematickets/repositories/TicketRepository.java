@@ -16,9 +16,7 @@ public interface TicketRepository extends JpaRepository<Ticket,Long> {
     @Query ("SELECT all FROM Ticket all WHERE all.solicitante= :usuario")
     List<Ticket> getByUser(@Param("usuario") Long usuario);
 
-    /**@Modifying
-    @Query("update User u set u.active = false where u.lastLoginDate < :date")
-    */
-    @Query("UPDATE Ticket t SET t.analista = :analista WHERE t.id_ticket = :id_ticket")
-    void updateAnalista(@Param("id_ticket") long id_ticket, @Param("analista") long analista);
+    @Query ("SELECT all FROM Ticket all WHERE all.analista= :usuario")
+    List<Ticket> getByAnalista(@Param("usuario") Long usuario);
+
 }

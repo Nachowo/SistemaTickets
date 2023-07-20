@@ -5,14 +5,16 @@ import com.example.sistematickets.Models.Usuario;
 import com.example.sistematickets.Services.ObservacionService;
 import com.example.sistematickets.Services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "https front")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("Observaciones")
 
@@ -23,11 +25,16 @@ public class ObservacionController {
     public ObservacionController(ObservacionService observacionService){
         this.observacionService = observacionService;
     }
+
     @PostMapping("/Usuario")
     public void crear(@RequestBody Observacion observacion) {
         observacionService.guardarObservacion(observacion);
     }
 
-    //funciones de busqueda como obtener
-
+    @PostMapping("/generarObs")
+    public ResponseEntity<?> guardarObs(@RequestBody Observacion observacion){
+        observacion.setFecha(new Timestamp(System.currentTimeMillis()));
+        observacionService.guardarObservacion(observacion);
+        return ResponseEntity.ok().build();
+    }
 }

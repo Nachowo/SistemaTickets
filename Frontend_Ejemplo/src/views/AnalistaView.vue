@@ -1,0 +1,139 @@
+<template>
+  <v-app>
+    <v-main class="text-center">
+      <NavBar />
+      <v-container fluid>
+        <v-row justify="center">
+          <v-col cols="12">
+            <h2 class="text-center">Tickets entrantes</h2>
+            <v-simple-table class="elevation-1" dense>
+              <template v-slot:default>
+                <thead>
+                <tr>
+                  <th class="text-left py-4">ID</th>
+                  <th class="text-left py-4">NOMBRE</th>
+                  <th class="text-left py-4">FECHA</th>
+                  <th class="text-left py-4">CATEGORÍA</th>
+                  <th class="text-left py-4"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                    v-for="(ticket, index) in historialTickets"
+                    :key="ticket.id"
+                    :class="index % 2 === 1 ? 'color-intermedio' : ''"
+                >
+                  <td class="text-left py-4">{{ ticket.id_ticket }}</td>
+                  <td class="text-left py-4">{{ ticket.titulo }}</td>
+                  <td class="text-left py-4">{{ ticket.fecha }}</td>
+                  <td class="text-left py-4">{{ ticket.categoria }}</td>
+                  <td>
+                    <v-btn
+                        block
+                        class="mb-1"
+                        color=#EA7600
+                        background-color=#394049
+                        @click="derivar(ticket)"
+                    >Responder ticket
+                    </v-btn>
+                  </td>
+                </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import NavBar from "../components/NavBar.vue";
+import axios from "axios";
+export default {
+  components: {
+    NavBar,
+  },
+  data() {
+    return {
+      historialTickets: [],
+    };
+  },
+  mounted() {
+    this.getTickets();
+
+  },
+  methods: {
+    async derivar(ticket){
+      try {
+        console.log(JSON.stringify(ticket));
+        const respuesta = await axios.post('http://localhost:8080/ticket/derivarTicket', ticket);
+        console.log(respuesta);
+        console.log(respuesta.status)
+        console.log(respuesta.status===200);
+        if (respuesta.status===200){
+          this.$router.push("/jefatura");
+        }
+
+      }catch{
+
+      }
+
+
+
+    },
+    async getTickets(){
+      try{
+        const analista = localStorage.getItem("id_usuario");
+        console.log(analista);
+        const respuesta = await axios.get('http://localhost:8080/ticket/obtenerTicketsAnalista',
+            {params:{
+              "analista":analista,
+              }
+
+            });
+
+
+        this.historialTickets = respuesta.data;
+      }catch{
+        console.log("error con los tickets");
+      }
+    },
+    verDetalle(ticket) {
+      // Lógica para ver el detalle del ticket
+      console.log("Ticket seleccionado:", ticket);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.v-data-table {
+  width: 100%;
+  border: 5px solid #000000; /* Agrega un borde a la tabla */
+}
+
+.v-data-table thead th {
+  white-space: normal;
+  border-bottom: 1px solid #000000; /* Agrega un borde inferior a las celdas del encabezado */
+}
+
+.v-data-table tbody td {
+  white-space: nowrap;
+  border-bottom: 1px solid #000000; /* Agrega un borde inferior a las celdas del cuerpo */
+}
+
+.color-intermedio {
+  background-color: #c5f1e4;
+}
+
+.py-4 {
+  padding: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+</style>

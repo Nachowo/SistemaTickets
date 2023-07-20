@@ -44,8 +44,6 @@ public class TicketController {
 
         Ticket ticket = new Ticket().crearSolicitudInv(0L,correo,titulo,categoria,descripcion);
         ticketService.guardarTicket(ticket);
-        System.out.println("ticket guardado");
-        System.out.println(ResponseEntity.ok().build());
         return ResponseEntity.ok().build();
     }
     @GetMapping("/listarTicketsJefatura")
@@ -53,6 +51,26 @@ public class TicketController {
         List<Ticket> lista = ticketService.getTicketsNoAsignados();
         return lista;
     }
+
+    /**
+    @PutMapping("/derivarTicket")
+    public void derivarTicket(@RequestBody Map<String,Object> consulta){
+        String x = consulta.get("id_ticket").toString();
+        Long id_ticket = Long.parseLong(x);
+        ticketService.derivar(id_ticket);
+    }*/
+    @PostMapping("/derivarTicket")
+    public ResponseEntity<?> derivarTicket(@RequestBody Ticket ticket){
+        try{
+            ticket.setAnalista(2L);
+            ticketService.derivar(ticket);
+            return ResponseEntity.ok().build();
+        }catch(Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+
 
     @GetMapping("/obtenerTicketsUsuario")
     public List<Ticket> obtenerTicketsUsuario(@RequestParam("id_usuario") String id){

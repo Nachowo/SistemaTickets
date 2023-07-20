@@ -41,6 +41,10 @@ public class TicketService {
          return usuarioRepository.findByCorreo(correo);
 
     }
+    public void derivar(Ticket ticket){
+        ticketRepository.save(ticket);
+
+    }
 
     public List<Ticket> getAllTickets(){
         return ticketRepository.findAll();

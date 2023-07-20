@@ -14,7 +14,7 @@
                     <th class="text-left py-4">NOMBRE</th>
                     <th class="text-left py-4">FECHA</th>
                     <th class="text-left py-4">CATEGORÍA</th>
-                    <th class="text-left py-4">ACCIONES</th>
+                    <th class="text-left py-4"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -25,12 +25,16 @@
                   >
                     <td class="text-left py-4">{{ ticket.id_ticket }}</td>
                     <td class="text-left py-4">{{ ticket.titulo }}</td>
-                    //<td class="text-left py-4">{{ ticket.fecha }}</td>
+                    <td class="text-left py-4">{{ ticket.fecha }}</td>
                     <td class="text-left py-4">{{ ticket.categoria }}</td>
                     <td>
-                      <v-icon small @click="verDetalle(ticket)" class="icon"
-                        >mdi-eye</v-icon
-                      >
+                      <v-btn
+                          block
+                          class="mb-1"
+                          color=#EA7600
+                          background-color=#394049
+                      ><div class="log-in">Revisar ticket</div>
+                      </v-btn>
                     </td>
                   </tr>
                 </tbody>

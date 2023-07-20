@@ -25,7 +25,7 @@
 
 <template> 
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="450" height="200" />
+    <img alt="Vue logo" class="logo" src="@/assets/STULOGO2.png" width="350" height="200" />
   </header>
   
   <div>

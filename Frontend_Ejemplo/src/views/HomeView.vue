@@ -56,7 +56,7 @@ export default {
           alt="Vue logo"
           class="logo"
           src="@/assets/STULOGO2.png"
-          width="450"
+          width="350"
           height="200"
         />
       </div>

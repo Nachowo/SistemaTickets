@@ -25,7 +25,7 @@
                   >
                     <td class="text-left py-4">{{ ticket.id_ticket }}</td>
                     <td class="text-left py-4">{{ ticket.titulo }}</td>
-                    <td class="text-left py-4">{{ formato(ticket.creacion)}}</td>
+                    <td class="text-left py-4">{{ darFormatoFecha(ticket.creacion)}}</td>
                     <td class="text-left py-4">{{ ticket.categoria }}</td>
                     <td>
 
@@ -51,7 +51,14 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import axios from "axios";
+import {darFormatoFecha} from '../extras';
 export default {
+  computed: {
+    formato() {
+      return formato
+    }
+  },
+
   components: {
     NavBar,
   },
@@ -66,9 +73,8 @@ export default {
 
   },
   methods: {
-    formato(fecha){
-      return new Intl.DateTimeFormat("es-ES",{dateStyle:"medium", timeStyle:"short"}).format(new Date(fecha));
-    },
+    darFormatoFecha,
+
     async getTickets(usuario){
       console.log(usuario);
       try{

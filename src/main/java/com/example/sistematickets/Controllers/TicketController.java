@@ -78,4 +78,11 @@ public class TicketController {
         System.out.println(id);
         return ticketService.getByAnalista(id_usuario);
     }
+
+    @PostMapping("/responderTicket")
+    public ResponseEntity<?> responder(@RequestBody Ticket ticket){
+        ticket.setEstado("Respondido");
+        ticketService.guardarTicket(ticket);
+        return ResponseEntity.ok().build();
+    }
 }

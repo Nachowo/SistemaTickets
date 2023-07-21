@@ -58,25 +58,18 @@
             <div>Titulo: {{ contenido.titulo }}</div>
             <div>Descripción: {{ contenido.descripcion }}</div>
             <div>Estado: {{ contenido.estado }}</div>
+            <v-textarea v-model="respuesta" label="Respuesta" variant="solo-filled"></v-textarea>
             <v-btn
                 block
                 class="mb-1"
                 color="#EA7600"
                 background-color="#394049"
                 @click="
-                if (derivar(contenido)) {
-                  ventanita = false;
-                }
+                responder(contenido);
+                this.respuesta='';
+                ventanita=false;
               "
-            ><div class="log-in">Derivar ticket</div>
-            </v-btn>
-            <v-btn
-                block
-                class="mb-1"
-                color="#EA7600"
-                background-color="#394049"
-                @click=""
-            ><div class="log-in">Cerrar ticket</div>
+            ><div class="log-in">Responder ticket</div>
             </v-btn>
           </div>
         </div>
@@ -98,6 +91,7 @@ export default {
       contenido:'',
       ventanita:false,
       historialTickets: [],
+      respuesta:'',
     };
   },
   mounted() {
@@ -105,6 +99,25 @@ export default {
 
   },
   methods: {
+    async responder(ticket){
+      console.log(this.respuesta);
+      console.log(ticket);
+      const hecho = await axios.post("http://localhost:8080/ticket/responderTicket",ticket);
+      if(hecho.status===200){
+        alert("Se ha respondido al ticket");
+      }
+      const observacion = {
+        tarea: "Se ha respondido el ticket",
+        usuario: localStorage.getItem("id_usuario"),
+        ticket: ticket.id_ticket,
+      };
+      console.log({
+        tarea: "Se ha respondido el ticket",
+        usuario: localStorage.getItem("id_usuario"),
+        ticket: ticket.id_ticket,
+      })
+      const obs = await axios.post("http://localhost:8080/Observaciones/generarObs",observacion)
+    },
     async getUsuario(id_user) {
       console.log(id_user);
       if(id_user===null){

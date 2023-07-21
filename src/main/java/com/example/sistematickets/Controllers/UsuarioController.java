@@ -46,6 +46,13 @@ public class UsuarioController {
         return retorno;
     }
 
+    @GetMapping("/getNombreUsuario")
+    public Optional<Usuario> getUsuario(@RequestParam String id_usuario){
+        System.out.println(id_usuario);
+        Long id = Long.parseLong(id_usuario);
+        return usuarioServices.find(Long.parseLong(id_usuario));
+    }
+
 
 
 

@@ -41,8 +41,9 @@ public class TicketService {
          return usuarioRepository.findByCorreo(correo);
 
     }
-    public void derivar(Ticket ticket){
-        ticketRepository.save(ticket);
+    public Ticket derivar(Ticket ticket){
+        ticket.setEstado("En revision");
+        return ticketRepository.save(ticket);
 
     }
 

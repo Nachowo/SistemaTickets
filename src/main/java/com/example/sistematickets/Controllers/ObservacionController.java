@@ -1,6 +1,7 @@
 package com.example.sistematickets.Controllers;
 
 import com.example.sistematickets.Models.Observacion;
+import com.example.sistematickets.Models.Ticket;
 import com.example.sistematickets.Models.Usuario;
 import com.example.sistematickets.Services.ObservacionService;
 import com.example.sistematickets.Services.UsuarioService;
@@ -12,6 +13,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:5173")

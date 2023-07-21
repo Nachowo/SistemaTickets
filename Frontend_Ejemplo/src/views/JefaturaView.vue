@@ -38,6 +38,7 @@
                         @click="
                           this.contenido = ticket;
                           ventanita = true;
+                          getUsuario(ticket.solicitante);
                         "
                         ><div class="log-in">Revisar ticket</div>
                       </v-btn>
@@ -52,31 +53,32 @@
           <div class="modal-overlay" @click="ventanita = false"></div>
           <div class="modal-content">
             <div>ID: {{ contenido.id_ticket }}</div>
-            <div>Fecha de creación: {{ contenido.creacion }}</div>
+            <div>Autor: {{ autorTicket }}</div>
+            <div>Fecha de creación: {{ darFormatoFecha(contenido.creacion) }}</div>
             <div>Titulo: {{ contenido.titulo }}</div>
             <div>Descripción: {{ contenido.descripcion }}</div>
             <div>Estado: {{ contenido.estado }}</div>
             <v-btn
-                block
-                class="mb-1"
-                color="#EA7600"
-                background-color="#394049"
-                @click="
-                          if(derivar(contenido)){
-                            ventanita=false;
-                          }
-                        "
-            ><div class="log-in">Derivar ticket</div>
+              block
+              class="mb-1"
+              color="#EA7600"
+              background-color="#394049"
+              @click="
+                if (derivar(contenido)) {
+                  ventanita = false;
+                };
+
+
+              "
+              ><div class="log-in">Derivar ticket</div>
             </v-btn>
             <v-btn
-                block
-                class="mb-1"
-                color="#EA7600"
-                background-color="#394049"
-                @click="
-
-                        "
-            ><div class="log-in">Cerrar ticket</div>
+              block
+              class="mb-1"
+              color="#EA7600"
+              background-color="#394049"
+              @click=""
+              ><div class="log-in">Cerrar ticket</div>
             </v-btn>
           </div>
         </div>
@@ -88,12 +90,14 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import axios from "axios";
+import {id} from "vuetify/locale";
 export default {
   components: {
     NavBar,
   },
   data() {
     return {
+      autorTicket:"",
       contenido: "",
       ventanita: false,
       historialTickets: [],
@@ -103,15 +107,33 @@ export default {
     this.getTickets();
   },
   methods: {
-    mostrarVentanita(ticket) {
-      this.contenido = ticket;
-      this.ventanita = true;
+    async getUsuario(id_user) {
+      console.log(id_user);
+      if(id_user===null){
+        return null;
+      }
+      try {
+
+        const hecho = await axios.get(
+          "http://localhost:8080/usuario/getNombreUsuario",
+            {params:{
+              id_usuario: id_user
+              }}
+
+        );
+        console.log(hecho.data.nombre);
+        if (hecho.status === 200) {
+          this.autorTicket = hecho.data.nombre;
+        }
+      } catch {
+        alert("Error ubicando al autor del ticket");
+      }
     },
     darFormatoFecha(fecha) {
       return new Intl.DateTimeFormat("es-ES", {
         dateStyle: "medium",
         timeStyle: "short",
-      }).format(new Date(fecha));
+      }).format(new Date(fecha))
     },
     async derivar(ticket) {
       try {
@@ -119,12 +141,20 @@ export default {
           "http://localhost:8080/ticket/derivarTicket",
           ticket
         );
+        const observacion = {
+          tarea: "Ticket derrivado a analista",
+          usuario: localStorage.getItem("id_usuario"),
+          ticket: respuesta.data.id_ticket,
+        };
         if (respuesta.status === 200) {
-          alert("Ticket derivado")
+          alert("Ticket derivado");
+          await axios.post("http://localhost:8080/Observaciones/generarObs",observacion);
           return true;
         }
-      } catch {alert("Hubo un error al derivar el ticket")
-    return false;}
+      } catch {
+        alert("Hubo un error al derivar el ticket");
+        return false;
+      }
     },
     async getTickets() {
       try {

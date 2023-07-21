@@ -58,8 +58,8 @@ public class TicketController {
     public ResponseEntity<?> derivarTicket(@RequestBody Ticket ticket){
         try{
             ticket.setAnalista(2L);
-            ticketService.derivar(ticket);
-            return ResponseEntity.ok().build();
+            Ticket t2 = ticketService.derivar(ticket);
+            return new ResponseEntity<>(t2, HttpStatus.OK);
         }catch(Exception e){
             return ResponseEntity.badRequest().build();
         }

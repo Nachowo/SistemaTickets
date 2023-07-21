@@ -5,7 +5,7 @@
       <v-container fluid>
         <v-row justify="center">
           <v-col cols="12">
-            <h2 class="text-center">Tickets entrantes</h2>
+            <h2 class="text-center">HISTORIAL DE REGISTROS DE TICKETS</h2>
             <v-simple-table class="elevation-1" dense>
               <template v-slot:default>
                 <thead>
@@ -25,16 +25,22 @@
                 >
                   <td class="text-left py-4">{{ ticket.id_ticket }}</td>
                   <td class="text-left py-4">{{ ticket.titulo }}</td>
-                  <td class="text-left py-4">{{ ticket.fecha }}</td>
+                  <td class="text-left py-4">
+                    {{ darFormatoFecha(ticket.creacion) }}
+                  </td>
                   <td class="text-left py-4">{{ ticket.categoria }}</td>
                   <td>
                     <v-btn
                         block
                         class="mb-1"
-                        color=#EA7600
-                        background-color=#394049
-                        @click="derivar(ticket)"
-                    >Responder ticket
+                        color="#EA7600"
+                        background-color="#394049"
+                        @click="
+                          this.contenido = ticket;
+                          ventanita = true;
+                          getUsuario(ticket.solicitante);
+                        "
+                    ><div class="log-in">Revisar ticket</div>
                     </v-btn>
                   </td>
                 </tr>
@@ -43,6 +49,37 @@
             </v-simple-table>
           </v-col>
         </v-row>
+        <div v-if="ventanita" class="modal">
+          <div class="modal-overlay" @click="ventanita = false"></div>
+          <div class="modal-content">
+            <div>ID: {{ contenido.id_ticket }}</div>
+            <div>Autor: {{ autorTicket }}</div>
+            <div>Fecha de creación: {{ contenido.creacion }}</div>
+            <div>Titulo: {{ contenido.titulo }}</div>
+            <div>Descripción: {{ contenido.descripcion }}</div>
+            <div>Estado: {{ contenido.estado }}</div>
+            <v-btn
+                block
+                class="mb-1"
+                color="#EA7600"
+                background-color="#394049"
+                @click="
+                if (derivar(contenido)) {
+                  ventanita = false;
+                }
+              "
+            ><div class="log-in">Derivar ticket</div>
+            </v-btn>
+            <v-btn
+                block
+                class="mb-1"
+                color="#EA7600"
+                background-color="#394049"
+                @click=""
+            ><div class="log-in">Cerrar ticket</div>
+            </v-btn>
+          </div>
+        </div>
       </v-container>
     </v-main>
   </v-app>
@@ -57,6 +94,9 @@ export default {
   },
   data() {
     return {
+      autorTicket:'',
+      contenido:'',
+      ventanita:false,
       historialTickets: [],
     };
   },
@@ -65,27 +105,38 @@ export default {
 
   },
   methods: {
-    async derivar(ticket){
-      try {
-        console.log(JSON.stringify(ticket));
-        const respuesta = await axios.post('http://localhost:8080/ticket/derivarTicket', ticket);
-        console.log(respuesta);
-        console.log(respuesta.status)
-        console.log(respuesta.status===200);
-        if (respuesta.status===200){
-          this.$router.push("/jefatura");
-        }
-
-      }catch{
-
+    async getUsuario(id_user) {
+      console.log(id_user);
+      if(id_user===null){
+        return null;
       }
+      try {
+        const hecho = await axios.get(
+            "http://localhost:8080/usuario/getNombreUsuario",
+            {params:{
+                id_usuario: id_user
+              }}
 
-
-
+        );
+        console.log(hecho.data.nombre);
+        if (hecho.status === 200) {
+          this.autorTicket = hecho.data.nombre;
+        }
+      } catch {
+        alert("Error ubicando al autor del ticket");
+      }
     },
+    darFormatoFecha(fecha) {
+      return new Intl.DateTimeFormat("es-ES", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(fecha));
+    },
+
     async getTickets(){
       try{
-        const analista = localStorage.getItem("id_usuario");
+        //const analista = localStorage.getItem("id_usuario");
+        const analista = 2;
         console.log(analista);
         const respuesta = await axios.get('http://localhost:8080/ticket/obtenerTicketsAnalista',
             {params:{
@@ -100,15 +151,42 @@ export default {
         console.log("error con los tickets");
       }
     },
-    verDetalle(ticket) {
-      // Lógica para ver el detalle del ticket
-      console.log("Ticket seleccionado:", ticket);
-    },
+
   },
 };
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 10;
+}
 .v-data-table {
   width: 100%;
   border: 5px solid #000000; /* Agrega un borde a la tabla */

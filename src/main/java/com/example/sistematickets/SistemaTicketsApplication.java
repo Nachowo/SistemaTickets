@@ -25,26 +25,6 @@ public class SistemaTicketsApplication {
         UsuarioRepository usuarioRepository = context.getBean(UsuarioRepository.class);
         TicketController ticketController = context.getBean(TicketController.class);
 
-
-        Scanner input = new Scanner(System.in);
-        String nombr = "Jano";
-        String correo = "jano@usach.cl";
-        String pass = "123";
-        String rol = "OLA";
-        String correo2 = "jano@usach.cl";
-
-            /**
-            System.out.println("Nombre");
-            nombr = input.nextLine();
-            System.out.println("Correo");
-            correo = input.nextLine();
-            System.out.println("Contrasena");
-            pass = input.nextLine();
-            */
-        //System.out.println(ticketService.findTicket( 1L));
-
-        //usuarioService.guardarUsuario(user);
-
     }
 
 

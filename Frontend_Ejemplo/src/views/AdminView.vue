@@ -11,27 +11,23 @@
             width="150"
             height="150"/>
       </h1>
-        <p class="titulo">BIENVENIDO AL SISTEMA DE TICKET USACH</p>
+      <p class="titulo">Vista de administrador</p>
 
-        <br>
-        <ul>
-          <li>
-          <p class="descripcion">Este es un servicios que permite gestionar de manera eficiente y efectiva las solicitudes, ademas priorizarlas según su importancia, asignando responsables y realizar un seguimiento adecuado para su resolución oportuna.</p>
-          </li>
-        </ul>
-        <br>
+      <br>
+
+      <br>
       <v-btn
           class="button"
           color="#EA7600"
           background-color="#394049"
           @click="irATickets"
-      >Hacer ticket</v-btn>
+      >Registrar usuarios</v-btn>
       <v-btn
           class="button"
           color="#EA7600"
           background-color="#394049"
           to="/historial"
-      >Historial</v-btn>
+      >Ver usuarios</v-btn>
 
 
 
@@ -49,15 +45,7 @@ export default {
       return localStorage.getItem("id_usuario");
     }
   },
-  methods:{
-    irATickets(){
-      console.log(localStorage.getItem("rol_usuario"));
-      this.$router.push({
-
-        path: "/ticket"
-      });
-    }
-  },
+  methods: {},
 
   components: {
     NavBar,

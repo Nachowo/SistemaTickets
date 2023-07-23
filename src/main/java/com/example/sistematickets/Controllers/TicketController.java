@@ -24,6 +24,17 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
+    @PostMapping("/cancelarTicket")
+    public ResponseEntity<?> cancelar(@RequestBody Ticket ticket){
+        ticket.setEstado("Cancelado");
+        try{
+            ticketService.guardarTicket(ticket);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            System.out.println(e);
+            return  ResponseEntity.badRequest().build();
+        }
+    }
     @PostMapping("/EnviarTicket")
     public ResponseEntity<?> Recibir(@RequestBody Map<String,Object> consulta){
         String titulo = (String) consulta.get("titulo");

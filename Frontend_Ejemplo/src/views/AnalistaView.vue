@@ -107,7 +107,7 @@ export default {
         alert("Se ha respondido al ticket");
       }
       const observacion = {
-        tarea: "Se ha respondido el ticket",
+        tarea: "Se ha respondido el ticket con: "+ this.respuesta,
         usuario: localStorage.getItem("id_usuario"),
         ticket: ticket.id_ticket,
       };

@@ -3,6 +3,7 @@
     <v-main class="text-center">
       <NavBar />
       <v-container fluid>
+
         <v-row justify="center">
           <v-col cols="12">
             <h2 class="text-center">HISTORIAL DE REGISTROS DE TICKETS</h2>
@@ -38,6 +39,7 @@
                         @click="
                           this.contenido = ticket;
                           ventanita = true;
+                          getObs(ticket);
                         "
                         ><div class="log-in">Revisar ticket</div>
                       </v-btn>
@@ -60,6 +62,7 @@
         <div>Titulo: {{ contenido.titulo }}</div>
         <div>Descripción: {{ contenido.descripcion }}</div>
         <div>Estado: {{ contenido.estado }}</div>
+        <div>Ultima modificación: {{this.obs }}</div>
       </div>
     </div>
   </div>
@@ -78,6 +81,7 @@ export default {
       contenido: "",
       ventanita: false,
       historialTickets: [],
+      obs: '',
     };
   },
   mounted() {
@@ -89,6 +93,19 @@ export default {
         dateStyle: "medium",
         timeStyle: "short",
       }).format(new Date(fecha));
+    },
+    async getObs(ticket){
+      try{
+        const respuesta = await axios.post(
+            "http://localhost:8080/Observaciones/obtenerUltimaObs",
+            ticket
+        );
+        console.log(respuesta.data.tarea);
+        this.obs = respuesta.data.tarea;
+      }catch{
+        this.obs = "error al obtener la ultima modificacion";
+      }
+
     },
     async getTickets(usuario) {
       console.log(usuario);

@@ -77,7 +77,7 @@
               class="mb-1"
               color="#EA7600"
               background-color="#394049"
-              @click=""
+              @click="cerrarTicket(contenido)"
               ><div class="log-in">Cerrar ticket</div>
             </v-btn>
           </div>
@@ -135,12 +135,34 @@ export default {
         timeStyle: "short",
       }).format(new Date(fecha))
     },
+    async cerrarTicket(ticket){
+      try{
+        const respuesta = await axios.post(
+            "http://localhost:8080/ticket/cancelarTicket",
+            ticket
+        );
+        console.log(ticket.id_ticket);
+        const observacion = {
+          tarea: "Ticket cancelado por jefatura",
+          usuario: localStorage.getItem("id_usuario"),
+          ticket: ticket.id_ticket,
+        };
+        if (respuesta.status === 200) {
+          alert("Ticket cancelado");
+          await axios.post("http://localhost:8080/Observaciones/generarObs",observacion);
+          return true;
+        }
+      }catch{
+
+      }
+    },
     async derivar(ticket) {
       try {
         const respuesta = await axios.post(
           "http://localhost:8080/ticket/derivarTicket",
           ticket
         );
+
         const observacion = {
           tarea: "Ticket derrivado a analista",
           usuario: localStorage.getItem("id_usuario"),

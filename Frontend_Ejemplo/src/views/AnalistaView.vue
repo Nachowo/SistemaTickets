@@ -66,7 +66,6 @@
                 background-color="#394049"
                 @click="
                 responder(contenido);
-                this.respuesta='';
                 ventanita=false;
               "
             ><div class="log-in">Responder ticket</div>
@@ -117,6 +116,7 @@ export default {
         ticket: ticket.id_ticket,
       })
       const obs = await axios.post("http://localhost:8080/Observaciones/generarObs",observacion)
+      console.log(obs.data)
     },
     async getUsuario(id_user) {
       console.log(id_user);

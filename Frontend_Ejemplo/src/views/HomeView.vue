@@ -40,6 +40,7 @@ export default {
           }
         } else {
           console.log("Credenciales incorrectas. ");
+          alert("Credenciales incorrectas")
         }
       } catch (error) {
         alert("Error de conexión");
@@ -132,27 +133,8 @@ export default {
                 ><div class="log-in">INVITADO</div>
               </v-btn>
             </RouterLink>
-            <RouterLink to="/jefatura">
-              <v-btn
-                block
-                class="mb-1"
-                color="surface-variant"
-                size="large"
-                variant=""
-                ><div class="log-in">jefatura</div>
-              </v-btn>
-            </RouterLink>
-            <RouterLink to="/analista">
-              <v-btn
-                  block
-                  class="mb-1"
-                  color="surface-variant"
-                  size="large"
-                  variant=""
 
-              ><div class="log-in">Analista</div>
-              </v-btn>
-            </RouterLink>
+
           </a>
         </v-card-text>
       </v-card>

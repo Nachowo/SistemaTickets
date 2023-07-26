@@ -11,6 +11,6 @@ import java.util.Optional;
 
 public interface ObservacionRepository extends JpaRepository<Observacion,Long> {
 
-    @Query("SELECT obs FROM Observacion obs where obs.ticket=:id order by obs.fecha LIMIT 1")
+    @Query("SELECT obs FROM Observacion obs where obs.ticket=:id order by obs.fecha DESC LIMIT 1")
     Optional<Observacion> getLastByTicket(@Param("id") Long id);
 }

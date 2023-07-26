@@ -18,12 +18,8 @@ import java.util.Scanner;
 @SpringBootApplication
 public class SistemaTicketsApplication {
 
-    public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(SistemaTicketsApplication.class, args);
-        UsuarioService usuarioService = context.getBean(UsuarioService.class);
-        TicketService ticketService = context.getBean(TicketService.class);
-        UsuarioRepository usuarioRepository = context.getBean(UsuarioRepository.class);
-        TicketController ticketController = context.getBean(TicketController.class);
+    public static void main(String[] args) {SpringApplication.run(SistemaTicketsApplication.class, args);
+
 
     }
 
